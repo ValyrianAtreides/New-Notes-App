@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "909641254501",
+    "project_id": "notes-app-reactnative",
+    "storage_bucket": "notes-app-reactnative.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909641254501:android:bf26c43f36138a3e63e88c",
+        "android_client_info": {
+          "package_name": "com.berkay.notes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM7lZV_NNSi4Wp0y9eWkVgZy03xSoUpZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
