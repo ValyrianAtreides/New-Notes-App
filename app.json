@@ -13,13 +13,16 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.berkay.notes"
     },
     "web": {
       "bundler": "metro",
@@ -29,15 +32,15 @@
     "plugins": [
       "expo-router",
       [
-        "expo-build-properties", 
+        "expo-build-properties",
         {
-        "ios": {
-          "useFrameworks": "static"
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
-      }],
+      ],
       "@react-native-firebase/app",
       "@react-native-firebase/auth"
-
     ],
     "experiments": {
       "typedRoutes": true
