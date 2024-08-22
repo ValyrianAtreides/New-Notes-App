@@ -1,11 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCMvaebuwfpWHVy42mQV3Q8LoX-GZwvabg",
   authDomain: "notes-app-reactnative.firebaseapp.com",
@@ -20,3 +17,33 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+const database = getDatabase();
+
+
+
+const auth = getAuth();
+
+export async function createUser(email,password) {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth,email,password);
+    const user = userCredential.user;
+    const userId = userCredential.user.uid;
+
+    const dbRef = ref(database, 'users/' + userId);
+
+    await set(dbRef, {
+      email: email,
+      password: password
+    });
+
+    console.log("uer created: ",user);
+    return user;
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(`Error Code: ${errorCode}, Error Message: ${errorMessage}`);
+    throw error;
+    
+  }
+}

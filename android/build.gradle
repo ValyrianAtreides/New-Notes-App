@@ -17,7 +17,7 @@ buildscript {
     }
     dependencies {
         // Updated Gradle plugin version with fixed version numbers
-        classpath 'com.google.gms:google-services:4.4.1'
+        classpath 'com.google.gms:google-services::4.3.15'
         classpath 'com.android.tools.build:gradle:8.1.0' // Specify Gradle version
         classpath 'com.facebook.react:react-native-gradle-plugin:0.71.0' // Example React Native plugin version
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"

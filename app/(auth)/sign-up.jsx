@@ -1,14 +1,26 @@
-import { View, Text, SafeAreaView, Pressable, Keyboard, TextInput, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, Pressable, Keyboard, TextInput, StyleSheet, Alert } from 'react-native'
 import React, {useState} from 'react'
 import CustomButton from '../Components/CustomButton'
-
+import { createUser } from '../../library/firebaseConfig'
+import {router} from 'expo-router'
 const signUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = async () => {
-
+    if ( email==""  || password=="" ) {
+      Alert.alert('Error', 'Please fill in all the fields');
+    }
+    setIsSubmitting(true)
+    try {
+      await createUser(email,password);
+      router.replace("/home");
+    } catch (error) {
+      Alert.alert('Error', error.message)
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
