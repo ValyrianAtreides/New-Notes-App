@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCMvaebuwfpWHVy42mQV3Q8LoX-GZwvabg",
+  apiKey: "",
   authDomain: "notes-app-reactnative.firebaseapp.com",
   databaseURL: "https://notes-app-reactnative-default-rtdb.firebaseio.com",
   projectId: "notes-app-reactnative",
