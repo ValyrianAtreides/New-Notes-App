@@ -97,8 +97,8 @@ const styles =  StyleSheet.create({
   loginTextField: {
     borderBottomWidth: 1,
     height: 55,
-    fontSize: 30,
-    fontWeight: "300",
+    fontSize: 24,
+    fontWeight: "400",
     color: 'black',
     marginBottom:10,
     borderRadius: 10,

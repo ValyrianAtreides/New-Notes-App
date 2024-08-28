@@ -1,7 +1,9 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import  {Stack} from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth'
+
 
 const AuthLayout = () => {
   return (
