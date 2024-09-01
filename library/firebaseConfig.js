@@ -1,6 +1,14 @@
   import { initializeApp } from "firebase/app";
   import { getAnalytics } from "firebase/analytics";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, initializeAuth, getReactNativePersistence } from "firebase/auth";
+  import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    onAuthStateChanged, 
+    initializeAuth, 
+    getReactNativePersistence,
+    signOut
+  } from "firebase/auth";
   import { getDatabase, ref, set } from "firebase/database";
   import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -32,19 +40,25 @@
 
   const database = getDatabase();
 
-  const auth = getAuth();
+  const auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+  });
+  
 
-  export async function createUser(email,password) {
+  export async function createUser(userName,email,password) {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth,email,password);
       const user = userCredential.user;
       const userId = userCredential.user.uid;
+      userCredential.user.displayName = userName
 
       const dbRef = ref(database, 'users/' + userId);
 
       await set(dbRef, {
+        userName: userName,
         email: email,
-        password: password
+        password: password,
+        displayName: userName
       });
 
       console.log("user created: ",user);
@@ -87,4 +101,15 @@
 
   export function getCurrentUser() {
     return auth.currentUser;
+  }
+
+  export async function logOut() {
+    try {
+      await signOut(auth);
+      console.log("User signed out successfully");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(`Error`)
+    }
   }

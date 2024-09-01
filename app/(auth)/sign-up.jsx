@@ -3,9 +3,12 @@ import React, {useState} from 'react'
 import CustomButton from '../Components/CustomButton'
 import { createUser } from '../../library/firebaseConfig'
 import {router} from 'expo-router'
+
+
 const signUp = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [userName, setUserName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const submit = async () => {
@@ -14,7 +17,7 @@ const signUp = () => {
     }
     setIsSubmitting(true)
     try {
-      await createUser(email,password);
+      await createUser(userName,email,password);
       router.replace("/home");
     } catch (error) {
       Alert.alert('Error', error.message)
@@ -34,6 +37,14 @@ const signUp = () => {
             <Text style={styles.titleText}>Sign Up </Text>
           </View>
           <View  >
+            <TextInput
+              style={styles.loginTextField}
+              placeholder="User Name"
+              value={userName}
+              onChangeText={setUserName}
+              autoCapitalize="none"
+              inputMode="texr"
+            />
             <TextInput
               style={styles.loginTextField}
               placeholder="Email"

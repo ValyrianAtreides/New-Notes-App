@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { Link, Redirect } from 'expo-router'
+import { Link, Redirect }  from 'expo-router'
 import { useGlobalContext } from '../context/GlobalProvider'
+import { router } from 'expo-router'
 
 
 const index = () => {
@@ -14,13 +15,12 @@ const index = () => {
   }
 
   if (isLoggedIn) {
-    return <Redirect href="/home" />;
+    router.replace('/home')
   }
 
   return (
     <View style={styles.mainContainer}>
       <Text>merhaba</Text>
-      <Link href="/home" style={styles.link}>Go to home page</Link>
       <Link href="/sign-up" style={styles.link}>Go to sign-up page</Link>
       <Link href="/sign-in" style={styles.link}>Go to sign in  page</Link>
 
