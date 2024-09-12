@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, Pressable, Keyboard, TextInput, StyleSheet, Alert } from 'react-native'
 import React, {useState} from 'react'
 import CustomButton from '../Components/CustomButton'
-import { createUser } from '../../library/firebaseConfig'
+import { createUser, signIn } from '../../library/firebaseConfig'
 import {router} from 'expo-router'
 
 
@@ -43,7 +43,7 @@ const signUp = () => {
               value={userName}
               onChangeText={setUserName}
               autoCapitalize="none"
-              inputMode="texr"
+              inputMode="text"
             />
             <TextInput
               style={styles.loginTextField}
@@ -64,6 +64,10 @@ const signUp = () => {
         </View>
         <CustomButton 
           title="Sign Up"
+          handlePress={submit}
+        />
+        <CustomButton 
+          title="Sign In"
           handlePress={submit}
         />
       </SafeAreaView>
