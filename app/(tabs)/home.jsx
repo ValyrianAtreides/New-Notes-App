@@ -6,8 +6,8 @@ import CustomButton from '../Components/CustomButton';
 import NewNoteButton from '../Components/NewNoteButton';
 import {router} from 'expo-router'
 
-const makeNewNote = () =>{
-  router.navigate("/MakeNote");
+const makeNewNote =  () => {
+  router.replace("/MakeNote")
 }
 
 const home = () => {
