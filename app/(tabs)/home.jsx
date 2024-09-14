@@ -3,7 +3,12 @@ import React from 'react'
 import { useGlobalContext } from '../../context/GlobalProvider'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../Components/CustomButton';
+import NewNoteButton from '../Components/NewNoteButton';
+import {router} from 'expo-router'
 
+const makeNewNote = () =>{
+  router.navigate("/MakeNote");
+}
 
 const home = () => {
   const {user, setUser, setIsloggedIn, setIsLoading} = useGlobalContext();
@@ -17,13 +22,10 @@ const home = () => {
         <Text>{user?.email}</Text>
       </View>
       <View style={styles.secondContainer}>
-        <Text>WELCOME</Text>
-        <View style={styles.buttonContainer}>
-          <CustomButton 
-          title="JK"
-          otherStyles={styles.buttonStyle}
-          />
-        </View>
+        <Text>ADD NEW NOTE</Text>
+        <NewNoteButton 
+          handlePress={makeNewNote}
+        />
       </View>
       <View style={styles.thirdContainer}>
         <Text>WELCOME</Text>
@@ -42,28 +44,19 @@ const styles =  StyleSheet.create({
   },
   secondContainer: {
     backgroundColor: 'antiquewhite',
-    flex:1
+    flex:1,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
   },
   thirdContainer: {
     backgroundColor: 'aqua',
     flex: 1
   },
-  buttonContainer: {
-    width: 250, // Butonun kapsayıcısının genişliği (ayarlanabilir)
-    height: 50, // Butonun kapsayıcısının yüksekliği (ayarlanabilir)
-    borderRadius: 50, // Kapsayıcıyı yuvarlak hale getirir
-    backgroundColor: 'green',
-    alignItems: 'center', // İçeriği ortala
-    justifyContent: 'center', // İçeriği ortala
-  },
   buttonStyle: {
     backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center'
-
   },
 })
-
-
 
 export default home
