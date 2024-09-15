@@ -96,7 +96,7 @@ export function checkAuthState(callback) {
   });
 }
   
-  // Şu anda oturum açmış kullanıcıyı döndüren fonksiyon
+
 export function getCurrentUser() {
   return auth.currentUser;
 }

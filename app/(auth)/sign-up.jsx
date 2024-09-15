@@ -59,6 +59,7 @@ const signUp = () => {
               value={password}
               onChangeText={setPassword}
               secureTextEntry
+              autoCapitalize="none"
             />
           </View>
         </View>
