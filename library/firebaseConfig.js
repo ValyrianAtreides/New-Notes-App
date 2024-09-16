@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+import firestore from '@react-native-firebase/firestore';
 
   const firebaseConfig = {
     apiKey: "AIzaSyCMvaebuwfpWHVy42mQV3Q8LoX-GZwvabg",
@@ -44,6 +45,8 @@ const database = getDatabase();
 const auth = initializeAuth(app, {
     persistence: getReactNativePersistence(ReactNativeAsyncStorage)
 });
+
+
   
 
 export async function createUser(userName,email,password) {
@@ -53,7 +56,6 @@ export async function createUser(userName,email,password) {
     const userId = userCredential.user.uid;
     const userName = userCredential.user.displayName
 
-    
     const dbRef = ref(database, 'users/' + userId);
     await set(dbRef, {
       email: email,
@@ -61,6 +63,7 @@ export async function createUser(userName,email,password) {
     });
     
     console.log("user created: ",user);
+    console.log("firestore : ",usersFirestore);
     return user;
   } catch (error) {
     const errorCode = error.code;
@@ -111,3 +114,4 @@ export async function logOut() {
     console.error(`Error`)
   }
 }
+
