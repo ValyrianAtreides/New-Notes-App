@@ -8,6 +8,7 @@ const GlobalProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [userCredentials, setUserCredentials] = useState(null);
 
   useEffect(() => {
     const unsubscribe = checkAuthState((user) => {
@@ -23,7 +24,7 @@ const GlobalProvider = ({ children }) => {
 
     return () => unsubscribe();
 
-  }, [])
+  }, []);
 
 
 

@@ -1,8 +1,25 @@
 import { View, Text, Pressable, SafeAreaView, StyleSheet , TextInput } from 'react-native'
-import React from 'react'
-
+import React, {useState} from 'react'
+import CustomButton from '../Components/CustomButton'
+import { createNote } from '../../library/firebaseConfig'
+import { router } from 'expo-router'
 
 const CreateNewNote = () => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  const addNote = async () => {
+    if ( title==""  || content=="" ) {
+      Alert.alert('Error', 'Please fill in all the fields');
+    }
+    try {
+      createNote(title,content);
+      router.push("/home");
+    } catch (error) {
+      Alert.alert('Error', error.message)
+    }
+  }
+
   return (
     <Pressable>
       <SafeAreaView style={styles.mainContainer}>
@@ -12,6 +29,8 @@ const CreateNewNote = () => {
             placeholder="Title"
             inputMode='text'
             autoCapitalize="words"
+            value={title}
+            onChangeText={setTitle}
           />
         </View>
         <View style={styles.noteContainer}>
@@ -21,8 +40,16 @@ const CreateNewNote = () => {
             inputMode='text'
             multiline={true}
             textAlignVertical='top'
+            value={content}
+            onChangeText={setContent}
           />
         </View>
+
+        <CustomButton 
+          title="new note"
+          handlePress={addNote}
+        
+        />
       </SafeAreaView>
     </Pressable>
   )

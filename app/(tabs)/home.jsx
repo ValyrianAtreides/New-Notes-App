@@ -28,7 +28,8 @@ const home = () => {
         />
       </View>
       <View style={styles.thirdContainer}>
-        <Text>WELCOME</Text>
+        <Text>list notes</Text>
+        
       </View>
     </SafeAreaView>
   )

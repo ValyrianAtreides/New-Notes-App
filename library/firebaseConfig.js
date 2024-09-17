@@ -10,11 +10,10 @@ import {
     signOut,
     updateProfile
 } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, update, push, get} from "firebase/database";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-import firestore from '@react-native-firebase/firestore';
 
-  const firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyCMvaebuwfpWHVy42mQV3Q8LoX-GZwvabg",
     authDomain: "notes-app-reactnative.firebaseapp.com",
     databaseURL: "https://notes-app-reactnative-default-rtdb.firebaseio.com",
@@ -23,10 +22,10 @@ import firestore from '@react-native-firebase/firestore';
     messagingSenderId: "909641254501",
     appId: "1:909641254501:web:73b831c1d7f87cbc63e88c",
     measurementId: "G-XLJWFBEXTW"
-  };
+};
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 
 async function initializeAnalytics() {
@@ -60,10 +59,13 @@ export async function createUser(userName,email,password) {
     await set(dbRef, {
       email: email,
       password: password,
+      notes : {
+        title:"",
+        content:""
+      }
     });
     
     console.log("user created: ",user);
-    console.log("firestore : ",usersFirestore);
     return user;
   } catch (error) {
     const errorCode = error.code;
@@ -115,3 +117,53 @@ export async function logOut() {
   }
 }
 
+export async function createNote(title, content) { 
+
+  try {
+    const currentUser = getCurrentUser();
+    const userId = currentUser.uid;
+
+    const dbRef = ref(database, 'users/' + userId + '/notes');
+
+    await push(dbRef, {
+       title: title,
+       noteContent: content,
+    });
+
+    
+    console.log("new note created", )
+    
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(`Error Code: ${errorCode}, Error Message: ${errorMessage}`);
+    throw error;
+  }
+  
+}
+
+export async function listNotes(userId) {
+
+  try {
+
+    const noteRef = ref(database, `users/${userId}/notes`);
+    const snapshot = await get(noteRef);
+
+    if (snapshot.exists()) {
+      const noteList = snapshot.val();
+
+      console.log("users note list:", noteList);
+      return noteList;
+    } else {
+      console.log("no data found");
+    }
+    
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(`Error Code: ${errorCode}, Error Message: ${errorMessage}`);
+    throw error;
+    
+  }
+  
+}
