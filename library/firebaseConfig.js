@@ -167,3 +167,25 @@ export async function listNotes(userId) {
   }
   
 }
+
+export async function getCurrentUserData(userId) {
+  try {
+    const userDatRef = ref(database, `users/${userId}`);
+    const snapshot = await get(userDatRef);
+
+    if (snapshot.exists()){
+      const userData = snapshot.val();
+      console.log("user data", userData);
+      return userData;
+    }
+    
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(`Error Code: ${errorCode}, Error Message: ${errorMessage}`);
+    throw error;
+    
+  }
+  
+}
+
