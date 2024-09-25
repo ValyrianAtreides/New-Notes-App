@@ -48,6 +48,7 @@ const CreateNewNote = () => {
         <CustomButton 
           title="new note"
           handlePress={addNote}
+          otherStyles={styles.buttonStyles}
         
         />
       </SafeAreaView>
@@ -105,6 +106,9 @@ const styles = StyleSheet.create({
     color: '#333',
     textAlignVertical: 'top',
     fontSize: 16
+  },
+  buttonStyles: {
+    height:100
   }
 })
 export default CreateNewNote

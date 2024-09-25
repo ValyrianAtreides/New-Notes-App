@@ -189,3 +189,28 @@ export async function getCurrentUserData(userId) {
   
 }
 
+export async function getUserNotes(userId) {
+  try {
+    const dbRef = ref(database, `users/${userId}/notes`);
+    const snapshot = await get(dbRef);
+
+    if (snapshot.exists()){
+      const notes = snapshot.val();
+      console.log("notes", notes);
+      const noteList = Object.keys(notes).map(key => ({
+        id: key,
+        ...notes[key]
+      }));
+      return noteList;
+    }
+
+    
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(`Error Code: ${errorCode}, Error Message: ${errorMessage}`);
+    throw error;
+    
+  }
+  
+}
